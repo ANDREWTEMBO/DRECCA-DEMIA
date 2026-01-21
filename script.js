@@ -348,3 +348,133 @@ window.addEventListener('load', () => {
         // Could implement chat history restoration here
     }
 });
+// Gemini AI Integration
+async function initializeGeminiAI() {
+    const API_KEY = "gen-lang-client-0709456847"; // Replace with actual key
+    
+    if (!API_KEY || API_KEY === "YOUR_GEMINI_API_KEY_HERE") {
+        console.log("No Gemini API key configured");
+        return null;
+    }
+    
+    try {
+        const genAI = new google.generativeAI.GoogleGenerativeAI(API_KEY);
+        const model = genAI.getGenerativeModel({ 
+            model: "gemini-1.5-flash",
+            generationConfig: {
+                temperature: 0.7,
+                maxOutputTokens: 500,
+            }
+        });
+        return model;
+    } catch (error) {
+        console.error("Failed to initialize Gemini:", error);
+        return null;
+    }
+}
+// Simple user system
+class UserSystem {
+    constructor() {
+        this.currentUser = localStorage.getItem('drecca_user') || null;
+    }
+    
+    login(username) {
+        this.currentUser = username;
+        localStorage.setItem('drecca_user', username);
+        this.updateUI();
+    }
+    
+    logout() {
+        this.currentUser = null;
+        localStorage.removeItem('drecca_user');
+        this.updateUI();
+    }
+    
+    updateUI() {
+        const nameElement = document.getElementById('studentName');
+        if (this.currentUser) {
+            nameElement.textContent = `Welcome back, ${this.currentUser}!`;
+        }
+    }
+}
+
+const userSystem = new UserSystem();
+
+// Enhanced chat with AI
+async function handleChatWithAI(text) {
+    const model = await initializeGeminiAI();
+    
+    if (!model) {
+        return "AI service is currently unavailable. Please try the basic chat.";
+    }
+    
+    const prompt = `You are Drecca AI, a helpful academic tutor at DRECCA DEMIA International Learning Institute.
+    
+    Context: We offer courses in Business, Technology, Law, and Data Science.
+    
+    Student Question: "${text}"
+    
+    Provide a helpful, educational response. If relevant, mention our course offerings.
+    Keep responses clear and concise.`;
+    
+    try {
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        return response.text();
+    } catch (error) {
+        console.error("AI Error:", error);
+        return "I apologize, but I'm having trouble processing your request right now.";
+    }
+}
+class CourseProgress {
+    constructor() {
+        this.enrolledCourses = JSON.parse(localStorage.getItem('enrolled_courses')) || [];
+    }
+    
+    enroll(courseId) {
+        this.enrolledCourses.push({
+            id: courseId,
+            enrolledAt: new Date(),
+            progress: 0,
+            completed: false
+        });
+        this.save();
+    }
+    
+    updateProgress(courseId, progress) {
+        const course = this.enrolledCourses.find(c => c.id === courseId);
+        if (course) {
+            course.progress = progress;
+            course.completed = progress >= 100;
+            this.save();
+        }
+    }
+    
+    save() {
+        localStorage.setItem('enrolled_courses', JSON.stringify(this.enrolledCourses));
+    }
+}
+/* Dark mode */
+[data-theme="dark"] {
+    --primary: #1e3a8a;
+    --gold: #d4af37;
+    --bg: #0f172a;
+    --white: #f1f5f9;
+}
+
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    font-size: 20px;
+    z-index: 1000;
+}
+
+
