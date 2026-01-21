@@ -5,31 +5,19 @@
     --bg: #f0f2f5;
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
-    margin: 0; font-family: 'Inter', sans-serif;
-    background: var(--bg); padding-bottom: 100px;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: #333;
+    min-height: 100vh;
+    padding-bottom: 120px;
 }
-
-/* Floating Navigation */
-.ldms-nav {
-    position: fixed; bottom: 20px; left: 50%;
-    transform: translateX(-50%); z-index: 100;
-}
-
-.nav-pill {
-    background: var(--primary); display: flex;
-    padding: 10px 20px; border-radius: 50px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3); gap: 15px;
-}
-
-.tab-btn {
-    background: transparent; border: none; color: white;
-    padding: 10px 20px; border-radius: 30px; cursor: pointer;
-    display: flex; align-items: center; gap: 8px; transition: 0.3s;
-}
-
-.tab-btn.active { background: var(--gold); color: var(--primary); font-weight: bold; }
-/* Add these after existing CSS */
 
 .container {
     max-width: 1200px;
@@ -37,18 +25,110 @@ body {
     padding: 20px;
 }
 
-/* Hero button */
+/* Floating Navigation */
+.ldms-nav {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+.nav-pill {
+    background: var(--primary);
+    display: flex;
+    padding: 12px 24px;
+    border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    gap: 10px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.tab-btn:hover {
+    background: rgba(197, 160, 89, 0.2);
+}
+
+.tab-btn.active {
+    background: var(--gold);
+    color: var(--primary);
+    font-weight: 600;
+    box-shadow: 0 4px 12px rgba(197, 160, 89, 0.3);
+}
+
+/* Content Visibility */
+.tab-content {
+    display: none;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Hero Section */
+.hero {
+    height: 70vh;
+    background: linear-gradient(rgba(10,35,81,0.9), rgba(10,35,81,0.9)), 
+                url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1200');
+    background-size: cover;
+    background-position: center;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    padding: 40px;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
 .btn-gold {
     background: var(--gold);
     color: var(--primary);
     border: none;
-    padding: 15px 40px;
+    padding: 16px 40px;
     border-radius: 50px;
     font-size: 18px;
     font-weight: 600;
     cursor: pointer;
-    margin-top: 30px;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    font-family: 'Inter', sans-serif;
 }
 
 .btn-gold:hover {
@@ -56,7 +136,7 @@ body {
     box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
 }
 
-/* Courses section */
+/* Courses Section */
 #courses h2 {
     text-align: center;
     margin: 40px 0;
@@ -76,13 +156,14 @@ body {
     background: white;
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
-    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    position: relative;
 }
 
 .course-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 .course-card img {
@@ -91,30 +172,68 @@ body {
     object-fit: cover;
 }
 
-.p-15 {
+.course-card .p-15 {
     padding: 20px;
 }
 
+.course-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: var(--gold);
+    color: var(--primary);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
 .course-card h4 {
-    margin: 0 0 10px 0;
+    font-family: 'Inter', sans-serif;
     font-size: 1.3rem;
+    margin-bottom: 10px;
     color: var(--primary);
 }
 
-.course-card p {
+.course-category {
     color: #666;
-    margin: 0 0 20px 0;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.course-desc {
+    color: #666;
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.course-meta {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    font-size: 13px;
+    color: #888;
+}
+
+.course-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 .enroll-btn {
     background: var(--primary);
     color: white;
     border: none;
-    padding: 10px 25px;
+    padding: 12px 25px;
     border-radius: 25px;
     cursor: pointer;
     font-weight: 600;
-    transition: all 0.3s;
+    transition: all 0.3s ease;
+    width: 100%;
+    font-size: 16px;
 }
 
 .enroll-btn:hover {
@@ -122,7 +241,7 @@ body {
     color: var(--primary);
 }
 
-/* Dashboard */
+/* Dashboard Section */
 .dashboard {
     max-width: 800px;
     margin: 40px auto;
@@ -132,7 +251,7 @@ body {
     background: white;
     padding: 40px;
     border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
 .user-card h3 {
@@ -173,59 +292,223 @@ body {
     transition: width 0.5s ease;
 }
 
-/* Chat improvements */
+/* Chat UI */
+.chat-wrapper {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    max-width: 800px;
+    margin: 40px auto;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 .chat-header {
     background: var(--primary);
     color: white;
-    padding: 20px;
+    padding: 20px 30px;
     font-size: 1.5rem;
     font-weight: 600;
     text-align: center;
 }
 
-.chat-input button {
+.chat-display {
+    flex: 1;
+    padding: 25px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+.chat-input {
+    display: flex;
+    padding: 20px;
+    border-top: 1px solid #e0e0e0;
+    background: white;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 15px 20px;
+    border: 2px solid #e0e0e0;
+    border-radius: 25px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.3s ease;
+}
+
+.chat-input input:focus {
+    outline: none;
+    border-color: var(--gold);
+}
+
+#sendBtn {
     background: var(--primary);
     color: white;
     border: none;
-    width: 50px;
-    border-radius: 5px;
-    margin-left: 10px;
+    width: 60px;
+    border-radius: 50%;
     cursor: pointer;
     font-size: 18px;
+    transition: all 0.3s ease;
 }
 
-.chat-input button:hover {
+#sendBtn:hover {
     background: var(--gold);
+    transform: scale(1.05);
 }
 
-/* Chat messages */
+/* Message Styling */
 .chat-display div {
-    margin-bottom: 15px;
-    padding: 15px;
-    border-radius: 10px;
+    margin-bottom: 20px;
+    padding: 15px 20px;
+    border-radius: 15px;
     background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
 
 .chat-display strong {
     color: var(--primary);
     display: block;
     margin-bottom: 5px;
+    font-size: 14px;
 }
 
 .chat-display p {
     margin: 0;
+    line-height: 1.5;
+    color: #333;
 }
 
-/* Responsive */
+.chat-display div:nth-child(odd) {
+    background: #f0f7ff;
+}
+
+/* Typing animation */
+.typing {
+    opacity: 0.7;
+    font-style: italic;
+}
+
+.dots span {
+    animation: blink 1.4s infinite;
+    animation-fill-mode: both;
+}
+
+.dots span:nth-child(2) { animation-delay: 0.2s; }
+.dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    20% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
+/* Notification System */
+.notification {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--primary);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    z-index: 1000;
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.notification.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+}
+
+.notification-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Loading Animation */
+#loading {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    transition: opacity 0.3s;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: var(--gold);
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
 @media (max-width: 768px) {
     .nav-pill {
-        padding: 8px 15px;
+        padding: 10px 15px;
         gap: 5px;
+    }
+    
+    .tab-btn {
+        padding: 10px 15px;
+        font-size: 12px;
     }
     
     .tab-btn span {
         display: none;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .hero p {
+        font-size: 1.2rem;
+    }
+    
+    .course-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .chat-wrapper {
+        height: 60vh;
+        margin: 20px;
+    }
+    
+    .notification {
+        width: 90%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .ldms-nav {
+        bottom: 20px;
+        width: 90%;
+    }
+    
+    .nav-pill {
+        justify-content: space-around;
+        padding: 8px;
     }
     
     .hero {
@@ -233,28 +516,7 @@ body {
         padding: 20px;
     }
     
-    .hero h1 {
-        font-size: 2.5rem;
+    .user-card {
+        padding: 20px;
     }
 }
-
-/* Content Visibility */
-.tab-content { display: none; animation: fadeIn 0.4s ease; }
-.tab-content.active { display: block; }
-
-@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-/* Hero Section */
-.hero {
-    height: 60vh; background: linear-gradient(rgba(10,35,81,0.8), rgba(10,35,81,0.8)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800');
-    background-size: cover; border-radius: 20px; display: flex;
-    flex-direction: column; align-items: center; justify-content: center;
-    color: white; text-align: center;
-}
-
-/* Chat UI */
-.chat-wrapper { background: white; border-radius: 15px; overflow: hidden; max-width: 600px; margin: auto; height: 70vh; display: flex; flex-direction: column; }
-.chat-display { flex: 1; padding: 20px; overflow-y: auto; background: #f9f9f9; }
-.chat-input { display: flex; padding: 15px; border-top: 1px solid #ddd; }
-.chat-input input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
-
