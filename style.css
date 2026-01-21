@@ -29,6 +29,214 @@ body {
 }
 
 .tab-btn.active { background: var(--gold); color: var(--primary); font-weight: bold; }
+/* Add these after existing CSS */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Hero button */
+.btn-gold {
+    background: var(--gold);
+    color: var(--primary);
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: all 0.3s;
+}
+
+.btn-gold:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(197, 160, 89, 0.4);
+}
+
+/* Courses section */
+#courses h2 {
+    text-align: center;
+    margin: 40px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--primary);
+}
+
+.course-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.course-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s;
+}
+
+.course-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.course-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.p-15 {
+    padding: 20px;
+}
+
+.course-card h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.3rem;
+    color: var(--primary);
+}
+
+.course-card p {
+    color: #666;
+    margin: 0 0 20px 0;
+}
+
+.enroll-btn {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+.enroll-btn:hover {
+    background: var(--gold);
+    color: var(--primary);
+}
+
+/* Dashboard */
+.dashboard {
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+.user-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
+.user-card h3 {
+    color: var(--primary);
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+}
+
+#studentName {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #555;
+}
+
+.progress-container {
+    margin-top: 30px;
+}
+
+.progress-container span {
+    display: block;
+    margin-bottom: 10px;
+    color: #666;
+    font-weight: 500;
+}
+
+.progress-bar {
+    height: 12px;
+    background: #e0e0e0;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.progress-bar .fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+/* Chat improvements */
+.chat-header {
+    background: var(--primary);
+    color: white;
+    padding: 20px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    text-align: center;
+}
+
+.chat-input button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    width: 50px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.chat-input button:hover {
+    background: var(--gold);
+}
+
+/* Chat messages */
+.chat-display div {
+    margin-bottom: 15px;
+    padding: 15px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.chat-display strong {
+    color: var(--primary);
+    display: block;
+    margin-bottom: 5px;
+}
+
+.chat-display p {
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .nav-pill {
+        padding: 8px 15px;
+        gap: 5px;
+    }
+    
+    .tab-btn span {
+        display: none;
+    }
+    
+    .hero {
+        height: 50vh;
+        padding: 20px;
+    }
+    
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+}
 
 /* Content Visibility */
 .tab-content { display: none; animation: fadeIn 0.4s ease; }
@@ -49,3 +257,4 @@ body {
 .chat-display { flex: 1; padding: 20px; overflow-y: auto; background: #f9f9f9; }
 .chat-input { display: flex; padding: 15px; border-top: 1px solid #ddd; }
 .chat-input input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+
