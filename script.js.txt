@@ -1,0 +1,75 @@
+const tabs = document.querySelectorAll('.tab-btn');
+const contents = document.querySelectorAll('.tab-content');
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+        // Remove active class from all
+        tabs.forEach(t => t.classList.remove('active'));
+        contents.forEach(c => c.classList.remove('active'));
+
+        // Add to clicked
+        tab.classList.add('active');
+        const target = tab.dataset.tab;
+        document.getElementById(target).classList.add('active');
+    });
+});
+
+
+const courseData = [
+    { title: "Global Business Ethics", category: "Business", img: "https://picsum.photos/id/1/300/200" },
+    { title: "AI for Educators", category: "Technology", img: "https://picsum.photos/id/2/300/200" },
+    { title: "International Law", category: "Social Sciences", img: "https://picsum.photos/id/3/300/200" }
+];
+
+function renderCourses() {
+    const list = document.getElementById('courseList');
+    list.innerHTML = courseData.map(course => `
+        <div class="course-card">
+            <img src="${course.img}" alt="${course.title}">
+            <div class="p-15">
+                <h4>${course.title}</h4>
+                <p>${course.category}</p>
+                <button class="enroll-btn">Enroll</button>
+            </div>
+        </div>
+    `).join('');
+}
+renderCourses();
+
+const API_KEY = "gen-lang-client-0709456847";
+const genAI = new window.GoogleGenerativeAI(API_KEY);
+const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+
+const chatDisplay = document.getElementById('chatDisplay');
+const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+
+async function handleChat() {
+    const text = userInput.value;
+    if (!text) return;
+
+    // Show User Message
+    appendMessage("You", text);
+    userInput.value = "";
+
+    try {
+        // System instruction: Telling AI it's a tutor for Drecca Demia
+        const prompt = `You are a helpful academic tutor at DRECCA DEMIA Learning Institute. 
+                        Answer this student question clearly: ${text}`;
+        
+        const result = await model.generateContent(prompt);
+        const response = await result.response;
+        appendMessage("Drecca AI", response.text());
+    } catch (error) {
+        appendMessage("System", "Error: AI Service Unavailable.");
+    }
+}
+
+function appendMessage(sender, text) {
+    const div = document.createElement('div');
+    div.innerHTML = `<strong>${sender}:</strong> <p>${text}</p>`;
+    chatDisplay.appendChild(div);
+    chatDisplay.scrollTop = chatDisplay.scrollHeight;
+}
+
+sendBtn.addEventListener('click', handleChat);

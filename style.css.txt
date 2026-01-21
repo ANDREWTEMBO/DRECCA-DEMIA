@@ -1,0 +1,51 @@
+:root {
+    --primary: #0a2351; /* Navy Blue */
+    --gold: #c5a059;
+    --white: #ffffff;
+    --bg: #f0f2f5;
+}
+
+body {
+    margin: 0; font-family: 'Inter', sans-serif;
+    background: var(--bg); padding-bottom: 100px;
+}
+
+/* Floating Navigation */
+.ldms-nav {
+    position: fixed; bottom: 20px; left: 50%;
+    transform: translateX(-50%); z-index: 100;
+}
+
+.nav-pill {
+    background: var(--primary); display: flex;
+    padding: 10px 20px; border-radius: 50px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3); gap: 15px;
+}
+
+.tab-btn {
+    background: transparent; border: none; color: white;
+    padding: 10px 20px; border-radius: 30px; cursor: pointer;
+    display: flex; align-items: center; gap: 8px; transition: 0.3s;
+}
+
+.tab-btn.active { background: var(--gold); color: var(--primary); font-weight: bold; }
+
+/* Content Visibility */
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Hero Section */
+.hero {
+    height: 60vh; background: linear-gradient(rgba(10,35,81,0.8), rgba(10,35,81,0.8)), url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800');
+    background-size: cover; border-radius: 20px; display: flex;
+    flex-direction: column; align-items: center; justify-content: center;
+    color: white; text-align: center;
+}
+
+/* Chat UI */
+.chat-wrapper { background: white; border-radius: 15px; overflow: hidden; max-width: 600px; margin: auto; height: 70vh; display: flex; flex-direction: column; }
+.chat-display { flex: 1; padding: 20px; overflow-y: auto; background: #f9f9f9; }
+.chat-input { display: flex; padding: 15px; border-top: 1px solid #ddd; }
+.chat-input input { flex: 1; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }

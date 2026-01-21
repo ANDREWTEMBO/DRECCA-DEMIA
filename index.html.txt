@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DRECCA DEMIA | International LDMS</title>
+    <!-- CSS and Fonts -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <!-- Google AI SDK -->
+    <script src="https://unpkg.com/@google/generative-ai"></script>
+</head>
+<body>
+
+    <!-- 1. NAVIGATION -->
+    <nav class="ldms-nav">
+        <div class="nav-pill">
+            <button class="tab-btn active" data-tab="home"><i class="fas fa-home"></i> <span>Home</span></button>
+            <button class="tab-btn" data-tab="courses"><i class="fas fa-graduation-cap"></i> <span>Courses</span></button>
+            <button class="tab-btn" data-tab="ldms"><i class="fas fa-user-graduate"></i> <span>LDMS</span></button>
+            <button class="tab-btn" data-tab="tutor"><i class="fas fa-robot"></i> <span>AI Tutor</span></button>
+        </div>
+    </nav>
+
+    <!-- 2. MAIN CONTENT SECTIONS -->
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="tab-content active">
+            <div class="hero">
+                <h1>DRECCA DEMIA</h1>
+                <p>Global Education. Infinite Potential.</p>
+                <button class="btn-gold" onclick="document.querySelector('[data-tab=courses]').click()">Explore Courses</button>
+            </div>
+        </section>
+
+        <!-- Courses Section -->
+        <section id="courses" class="tab-content">
+            <h2>International Course Catalog</h2>
+            <div class="course-grid" id="courseList">
+                <!-- Courses will be injected here by JS -->
+            </div>
+        </section>
+
+        <!-- LDMS Section (Dashboard) -->
+        <section id="ldms" class="tab-content">
+            <div class="dashboard">
+                <div class="user-card">
+                    <h3>Student Dashboard</h3>
+                    <p id="studentName">Welcome, International Learner</p>
+                    <div class="progress-container">
+                        <span>Course Completion</span>
+                        <div class="progress-bar"><div class="fill" style="width: 45%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI Tutor Section -->
+        <section id="tutor" class="tab-content">
+            <div class="chat-wrapper">
+                <div class="chat-header">Drecca AI Study Assistant</div>
+                <div id="chatDisplay" class="chat-display"></div>
+                <div class="chat-input">
+                    <input type="text" id="userInput" placeholder="Ask about your lesson...">
+                    <button id="sendBtn"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
